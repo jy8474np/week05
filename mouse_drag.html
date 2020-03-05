@@ -41,9 +41,8 @@
 <P>Drag the mouse on the canvas</P>
 
 <!--Create a selector with color options-->
+<p>Line Color:<p>
 <div>
-    <p>
-        Line Color:
         <select id="line-color">
             <!-- Associate color styles w selections. No selection starts with black as default color-->
             <option id="black"disabled selected value=""> Select a Color </option>
@@ -51,16 +50,17 @@
             <option id="red"  name="line-color">Red</option>
             <option id="green" name="line-color">Green</option>
 </select>
-    </p>
+
 </div>
 
 <!--Range slider assistance via https://www.geeksforgeeks.org/creating-range-slider-html-using-javascript/-->
 
 <!--Create a range slider and display the value-->
+<p>Line Size:</p>
 <div class="rangeslider">
     <input type="range" min="1" max="10" value="5" class="myslider" id="sliderRange">
     <span id="demo"></span>
-</div>
+</div></p>
 
 <canvas id="canvas" height="400" width="400"></canvas>
 
