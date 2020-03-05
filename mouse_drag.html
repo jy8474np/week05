@@ -28,6 +28,10 @@
             color: black;
         }
 
+        .rangeslider{
+            width: 50%;
+        }
+
     </style>
 
 </head>
@@ -36,24 +40,43 @@
 
 <P>Drag the mouse on the canvas</P>
 
-
+<!--Create a selector with color options-->
 <div>
     <p>
-Line Color
-<select id="line-color">
-    <!-- Associate color styles w selections. No selection starts with black as default color-->
-    <option id="black"disabled selected value=""> Select a Color </option>
-    <option id="blue" name="line-color">Blue</option>
-    <option id="red"  name="line-color">Red</option>
-    <option id="green" name="line-color">Green</option>
+        Line Color:
+        <select id="line-color">
+            <!-- Associate color styles w selections. No selection starts with black as default color-->
+            <option id="black"disabled selected value=""> Select a Color </option>
+            <option id="blue" name="line-color">Blue</option>
+            <option id="red"  name="line-color">Red</option>
+            <option id="green" name="line-color">Green</option>
 </select>
     </p>
 </div>
+
+<!--Range slider assistance via https://www.geeksforgeeks.org/creating-range-slider-html-using-javascript/-->
+
+<!--Create a range slider and display the value-->
+<div class="rangeslider">
+    <input type="range" min="1" max="10" value="5" class="myslider" id="sliderRange">
+    <span id="demo"></span>
+</div>
+
 <canvas id="canvas" height="400" width="400"></canvas>
 
 <script>
     // Reads the line color selection
     let lineColorSelect = document.querySelector('#line-color')
+
+    // Reads the range selection
+    let rangeslider = document.getElementById("sliderRange");
+    let output = document.getElementById("demo");
+    output.innerHTML = rangeslider.value;
+
+    // Produces the range selection output
+    rangeslider.oninput = function() {
+        output.innerHTML = this.value;
+    }
 
     let canvas = document.getElementById("canvas")
     let context = canvas.getContext("2d")
@@ -85,7 +108,7 @@ Line Color
 
         // Replace filled rectangle instructions with filled circle instructions
         context.beginPath();
-        context.arc(x-5, y-5, 5, 0, 2 * Math.PI);
+        context.arc(x-5, y-5, rangeslider.value, 0, 2 * Math.PI);
         // Determine what color the mouse line will be
         context.fillStyle = lineColorSelect.value;
         context.fill();
