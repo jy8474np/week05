@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,24 @@
             border: 1px black solid;
         }
 
+        /*Add line color styles*/
+
+        #blue {
+            color: blue;
+        }
+
+        #red {
+            color: red;
+        }
+
+        #green {
+            color: green;
+        }
+
+        #black {
+            color: black;
+        }
+
     </style>
 
 </head>
@@ -18,16 +35,29 @@
 
 
 <P>Drag the mouse on the canvas</P>
-<p>(Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com)</a></p>
+
+
+
+<p> Line Color </p>
+<select id="line-color">
+<!-- Associate color styles w selections. No selection starts with black as default color-->
+    <option id="black"disabled selected value=""> Select a Color </option>
+    <option id="blue" name="line-color">Blue</option>
+    <option id="green"  name="line-color">Red</option>
+    <option id="green" name="line-color">Green</option>
+</select>
+
 <canvas id="canvas" height="400" width="400"></canvas>
 
 <script>
+    // Reads the line color selection
+    let lineColorSelect = document.querySelector('#line-color')
 
-    var canvas = document.getElementById("canvas")
-    var context = canvas.getContext("2d")
+    let canvas = document.getElementById("canvas")
+    let context = canvas.getContext("2d")
 
     // Keep track of whether the mouse button has been pressed down or not.
-    var mousedown = false
+    let mousedown = false
 
     canvas.addEventListener("mousedown", function() {
         mousedown = true
@@ -44,12 +74,19 @@
 
         // event is a built-in variable, contains the event that triggered this function
         // get the x, y location of the event
-        var x = event.offsetX
-        var y = event.offsetY   //offsetX, offsetY, may not work in older browsers
+        let x = event.offsetX
+        let y = event.offsetY   //offsetX, offsetY, may not work in older browsers
 
         //Draw a filled rectangle centered under the mouse click
         //x, y is the top left corner, so shift up and left by 5 to center it under the mouse.
-        context.fillRect(x-5, y-5, 10, 10)
+        // context.fillRect(x-5, y-5, 10, 10)
+
+        // Replace filled rectangle instructions with filled circle instructions
+        context.beginPath();
+        context.arc(x-5, y-5, 5, 0, 2 * Math.PI);
+        // Determine what color the mouse line will be
+        context.fillStyle = lineColorSelect.value;
+        context.fill();
 
     })
 
